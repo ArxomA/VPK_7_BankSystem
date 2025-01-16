@@ -1,0 +1,14 @@
+<h2>Оплата</h2>
+<p>Итого к оплате: {{ total_price }} руб.</p>
+<form action="/checkout" method="post">
+    <label for="payment_method">Способ оплаты:</label>
+    <select name="payment_method" id="payment_method">
+        <option value="phone">Номер телефона</option>
+        <option value="card">Карта</option>
+    </select>
+    <br>
+    <label for="identifier">Введите номер телефона или карты:</label>
+    <input type="text" id="identifier" name="identifier" required>
+    <br>
+    <button type="submit">Оплатить</button>
+</form>

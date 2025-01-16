@@ -1,0 +1,75 @@
+swagger: "2.0"
+info:
+  title: "Payment API"
+  version: "1.0"
+host: "localhost:5001"
+schemes:
+  - "http"
+paths:
+  /pay:
+    post:
+      summary: "Process a payment"
+      tags:
+        - "Payment"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              phone:
+                type: "string"
+                description: "Phone number linked to a card"
+              card:
+                type: "string"
+                description: "Card number for payment"
+              amount:
+                type: "number"
+                description: "Payment amount"
+      responses:
+        200:
+          description: "Payment processed successfully"
+          schema:
+            type: "object"
+            properties:
+              transaction_id:
+                type: "integer"
+                description: "ID of the processed transaction"
+              status:
+                type: "string"
+                description: "Status of the transaction"
+              remaining_balance:
+                type: "number"
+                description: "Remaining balance on the card"
+        400:
+          description: "Invalid request"
+
+  /status/{transaction_id}:
+    get:
+      summary: "Get transaction status"
+      tags:
+        - "Transaction"
+      parameters:
+        - in: "path"
+          name: "transaction_id"
+          required: true
+          type: "integer"
+          description: "The ID of the transaction to retrieve"
+      responses:
+        200:
+          description: "Transaction details retrieved successfully"
+          schema:
+            type: "object"
+            properties:
+              card:
+                type: "string"
+                description: "Card number used in the transaction"
+              amount:
+                type: "number"
+                description: "Amount paid in the transaction"
+              status:
+                type: "string"
+                description: "Status of the transaction"
+        404:
+          description: "Transaction not found"

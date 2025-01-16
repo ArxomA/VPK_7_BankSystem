@@ -1,0 +1,34 @@
+swagger: "2.0"
+info:
+  title: "Payment API"
+  version: "1.0"
+host: "localhost:5001"
+schemes:
+  - "http"
+paths:
+  /pay:
+    post:
+      summary: "Process a payment"
+      tags:
+        - "Payment"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              phone:
+                type: "string"
+                description: "Phone number linked to a card"
+              card:
+                type: "string"
+                description: "Card number for payment"
+              amount:
+                type: "number"
+                description: "Payment amount"
+      responses:
+        200:
+          description: "Payment processed successfully"
+        400:
+          description: "Invalid request"
